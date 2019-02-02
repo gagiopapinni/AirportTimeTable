@@ -7,7 +7,7 @@ class TimeTable {
            container_id          [String]            // id of an HTML container, included in dom tree
            apiKey                [String]            // aviation-edge.com api key
            airports              [Array]             // list of iata airport codes
-           iataAirportDictionary [Object] OPTIONAL   // and object assotiating an iata airport code to its location 
+           iataAirportDictionary [Object] OPTIONAL   // and object associating an iata airport code to its location 
      */
      constructor(options = {}){
 
