@@ -117,7 +117,7 @@ class TimeTable {
      }
      
      _update(){
-        this._display();// loading taked time, so we clear to show that loading has started
+        this._display();// loading takes time, so we clear to show that loading has started
 
         return this._get_data().then((data) => this._display(data))
                                .catch((e)=>{
