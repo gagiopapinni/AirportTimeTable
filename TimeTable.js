@@ -145,7 +145,7 @@ class TimeTable {
                       if(data.arrival && data.departure) resolve(data);                    
                })
 
-               request.open('GET','http://aviation-edge.com/v2/public/timetable?key='
+               request.open('GET','https://aviation-edge.com/v2/public/timetable?key='
                          +this._KEY+'&iataCode='+this._selected_airport+'&type='+type);
                request.send();
             }
