@@ -22,10 +22,19 @@
 
                                   container_id:'ttbl',
                                   apiKey:KEY,
-                                  airports: ['EVN','SVO','VKO','LHR'],
+                                  airports: ['EVN','SVO','VKO','LHR0'],
                                   iataAirportDictionary: iataAirportDictionary
          
                              });
+
+              setInterval(()=>{
+                    table.update().then(()=>{
+                          //...
+                    }).catch((e)=>{
+                          //...
+                    })                                   
+ 
+              },600*1000);       
         </script>
 
    </body>

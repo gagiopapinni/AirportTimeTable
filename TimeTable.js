@@ -23,7 +23,7 @@ class TimeTable {
          
          this._init_dom();
 
-         this._update();
+         this.update();
          
      }
      _init_dom(){
@@ -92,8 +92,8 @@ class TimeTable {
          this._selected_airport = airport_select.value;
 
          airport_select.addEventListener('input',(e)=>{ 
-                this._selected_airport = e.target.value;    
-                this._update().then( ()=>this._filter([0,search.value],[3,filter.value]) );
+                this._selected_airport = e.target.value;   
+                this.update(); 
          })
 
          filter.addEventListener('input',(e)=>{
@@ -116,14 +116,22 @@ class TimeTable {
          
      }
      
-     _update(){
+     update(){
         this._display();// loading takes time, so we clear to show that loading has started
 
-        return this._get_data().then((data) => this._display(data))
+        return this._get_data().then((data) =>{
+
+                                    this._display(data);
+                                    this._filter([0,document.getElementById('search_input').value],
+                                                 [3,document.getElementById('filter').value]);
+
+                                 })
                                .catch((e)=>{
 
                                     this._display();
                                     alert(e);
+
+                                    throw e;
 
                                  });
      }
