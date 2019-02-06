@@ -1,5 +1,5 @@
 
-class TimeTable {
+class TimeTable extends EventTarget {
 
      /*options [Object]
 
@@ -8,8 +8,12 @@ class TimeTable {
            apiKey                [String]            // aviation-edge.com api key
            airports              [Array]             // list of iata airport codes
            iataAirportDictionary [Object] OPTIONAL   // and object associating an iata airport code to its location 
+
+       events: apiCallLimit, invalidKey, invalidAirportCode
+             
      */
      constructor(options = {}){
+         super();
 
          this._container = document.getElementById(options.container_id);
 
@@ -129,11 +133,21 @@ class TimeTable {
                                .catch((e)=>{
 
                                     this._display();
-                                    alert(e);
+
+                                    this._dispatch(e);
 
                                     throw e;
 
                                  });
+     }
+     _dispatch(e){
+         switch(e){
+           case 'Invalid API KEY': this.dispatchEvent(new Event('invalidKey'));break;
+           case 'No Record Found': this.dispatchEvent(new Event('invalidAirportCode'));break;
+           case 'Your API Call Limit is Over.': this.dispatchEvent(new Event('apiCallLimit'));break;
+           //...
+         }
+
      }
      _get_data (){
          return new Promise((resolve,reject)=>{

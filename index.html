@@ -27,11 +27,15 @@
          
                              });
 
+              table.addEventListener('apiCallLimit',()=>alert('Api key Limit is over'));
+              table.addEventListener('invalidKey',()=>alert('Api key is invalid'));
+              table.addEventListener('invalidAirportCode',()=>alert('airport iata code is incorrect'));
+
               setInterval(()=>{
                     table.update().then(()=>{
-                          //...
+                          console.log('updated');
                     }).catch((e)=>{
-                          //...
+                          console.log('failed to update');
                     })                                   
  
               },600*1000);       
