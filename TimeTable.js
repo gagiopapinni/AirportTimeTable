@@ -121,7 +121,7 @@ class TimeTable extends EventTarget {
      }
      
      update(){
-        this._display();// loading takes time, so we clear to show that loading has started
+        this._display("Loading");
 
         return this._get_data().then((data) =>{
 
@@ -177,7 +177,6 @@ class TimeTable extends EventTarget {
      }
 
 
-
      _display (data = null){ 
          for(let type of ['arrival','departure']){
 
@@ -191,9 +190,13 @@ class TimeTable extends EventTarget {
                            </tr>
                           `;
 
-               if(data && data[type])
-                 for(let obj of data[type] )                  
-                   rows += this._composeRow(obj,type)
+               
+               if(typeof data === "string") rows+=`<p class='h1'>${data}</p>`; 
+               else if(data && data[type])
+                      for(let obj of data[type] )                  
+                        rows += this._composeRow(obj,type)
+                 
+               
 
                table.innerHTML = rows;
 
